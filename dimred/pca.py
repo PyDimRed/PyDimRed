@@ -11,16 +11,17 @@ class PCA():
 
 
     def _fit(self, X):
-        sigma = np.matmul(X, X.T)
+        sigma = np.matmul(np.transpose(X), X) / len(X)
         U, S, V = np.linalg.svd(sigma)
         self.ureduce = U[:, 0:self.n_component]
 
     def fit(self, X):
-        return self._fit(X)
+        self._fit(X)
+        return self
 
     def transform(self, X):
         return np.matmul(X, self.ureduce)
 
     def inv_transform(self, X):
-        return np.matmul(X, self.ureduce.T)
+        return np.matmul(X, np.transpose(self.ureduce))
 
