@@ -3,9 +3,16 @@ import pandas as pd
 import scipy as sp
 
 class PCA():
+    """
 
+    """
     def __init__(self, n_component):
+        """
 
+        Parameters
+        ----------
+        n_component
+        """
         self.n_component = n_component
         self.ureduce = None
 
