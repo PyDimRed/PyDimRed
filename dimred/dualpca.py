@@ -90,5 +90,18 @@ class DualPCA():
         # np.matmul(np.transpose(self.learning_X), x)))
 
     def inv_transform(self, X):
+        """
+        Transform data back to its original space.
+
+        Parameters
+        ----------
+        X : numpy.array
+         New data
+
+        Returns
+        -------
+        X_original : numpy.array
+
+        """
         return np.matmul(X, np.matmul(self.vreduce, np.transpose(self.vreduce)))
 
