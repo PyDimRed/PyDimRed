@@ -1,3 +1,10 @@
+""" Dual Principal Component Analysis
+"""
+
+# Author: MohammadSadegh Akhondzadeh <ms.akhondzadeh@gmail.com>
+#         Maryam Meghdadi <m.meghdadi@acm.org>
+
+# License: BSD 3 clause
 import numpy as np
 import pandas as pd
 import scipy as sp
@@ -34,7 +41,7 @@ class DualPCA():
         Parameters
         ----------
         X : numpy.array
-            Training data
+            Training data, shape (n_samples, n_features)
 
         Returns
         -------
@@ -52,7 +59,7 @@ class DualPCA():
         Parameters
         ----------
         X : numpy.array
-            Training data
+            Training data, shape (n_samples, n_features)
         Returns
         -------
 
@@ -74,7 +81,7 @@ class DualPCA():
         Parameters
         ----------
         x : numpy.array
-            New data
+            New data, shape (n_samples_new, n_features)
 
         Returns
         -------
