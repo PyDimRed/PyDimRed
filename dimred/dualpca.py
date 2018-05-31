@@ -85,7 +85,7 @@ class DualPCA():
 
         Returns
         -------
-         X_new : numpy.array
+         X_new : numpy.array shape (n_samples_new, n_components)
 
 
         """
@@ -103,11 +103,11 @@ class DualPCA():
         Parameters
         ----------
         X : numpy.array
-         New data
+         New data, shape (n_samples_new, n_features)
 
         Returns
         -------
-        X_original : numpy.array
+        X_original : numpy.array shape (n_samples_new, n_components)
 
         """
         return np.matmul(X, np.matmul(self.vreduce, np.transpose(self.vreduce)))
