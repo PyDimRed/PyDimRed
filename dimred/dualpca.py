@@ -47,11 +47,11 @@ class DualPCA():
         -------
 
         """
-        self.learning_X = X
-        sigma = np.matmul(np.transpose(X), X) / len(X)
+        self.learning_X = np.transpose(X)
+        sigma = np.matmul(np.transpose(self.learning_X), self.learning_X) / len(self.learning_X)
         U, S, V = np.linalg.svd(sigma)
-        self.sigma = S
-        self.vreduce = V[:, 0:self.n_component]
+        self.sigma = np.diag(S[0:self.n_component])
+        self.vreduce = np.transpose(V)[0:self.n_component, :]
 
     def fit(self, X):
         """
@@ -89,14 +89,15 @@ class DualPCA():
 
 
         """
-        a = np.matmul(np.transpose(self.learning_X), x)
-        b = np.matmul(np.transpose(self.vreduce), a)
+        a = np.matmul(np.transpose(self.learning_X), np.transpose(x))
+        b = np.matmul(self.vreduce, a)
         c = np.matmul(np.linalg.inv(self.sigma), b)
+        c = np.transpose(c)
         return c
         #return np.matmul(np.linalg.inv(self.sigma), np.matmul(np.transpose(self.vreduce),
         # np.matmul(np.transpose(self.learning_X), x)))
 
-    def inv_transform(self, X):
+    def inv_transform(self, x):
         """
         Transform data back to its original space.
 
@@ -110,5 +111,12 @@ class DualPCA():
         X_original : numpy.array shape (n_samples_new, n_components)
 
         """
-        return np.matmul(X, np.matmul(self.vreduce, np.transpose(self.vreduce)))
+        a = np.matmul(np.transpose(self.learning_X), np.transpose(x))
+        b = np.matmul(self.vreduce, a)
+        c = np.matmul(np.linalg.inv(self.sigma), b)
+        d = np.matmul(np.linalg.inv(self.sigma), c)
+        e = np.matmul(self.vreduce, d)
+        f = np.matmul(self.learning_X, e)
+        f = np.transpose(f)
+        return f
 
