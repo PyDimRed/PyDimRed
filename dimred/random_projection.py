@@ -27,7 +27,7 @@ class RandomProjection():
 
     def transform(self, X):
 
-        X_new = np.dot(X, self.component)
+        X_new = np.dot(X, self.component.T)
         return X_new
 
 
