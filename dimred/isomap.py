@@ -10,9 +10,9 @@ class IsoMap():
 
 
 
-    def __init__(self, n_component):
+    def __init__(self, n_component, n_neighbour ):
 
-
+        self.n_neighbour = n_neighbour
         self.n_component = n_component
         self.k = None
         self.lambdas = None
@@ -21,11 +21,12 @@ class IsoMap():
 
     def _fit(self, X):
 
-        neighbour = NearestNeighbors(n_neighbors=50)
+        neighbour = NearestNeighbors(n_neighbors=self.n_neighbour)
         neighbour.fit(X)
-        self.kneargraph = kneighbors_graph(neighbour, n_neighbors=50, mode = 'distance')
+        self.kneargraph = kneighbors_graph(neighbour, n_neighbors=self.n_neighbour, mode = 'distance')
         D = graph_shortest_path(self.kneargraph, directed=False)
-        H = np.eye(1000, 1000) - 1 / 1000 * np.ones((1000, 1000))
+        size = D.shape[0]
+        H = np.eye(size, size) - 1 / size * np.ones((size, size))
         self.k = -1 / 2 * H.dot(D ** 2).dot(H)
         self.lambdas, self.alphas = sp.linalg.eigh(self.k)
 
