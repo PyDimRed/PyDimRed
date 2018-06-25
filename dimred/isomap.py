@@ -19,6 +19,7 @@ class IsoMap():
         self.alphas = None
         self.kneargraph = None
 
+
     def _fit(self, X):
 
         neighbour = NearestNeighbors(n_neighbors=self.n_neighbour)
