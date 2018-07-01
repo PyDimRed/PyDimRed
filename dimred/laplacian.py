@@ -26,8 +26,8 @@ class Laplacian():
         #
         laplacian, dig = sparse.csgraph.laplacian(self.affinity, normed=True, return_diag=True)
         lambdas, eigvec = eigsh(-laplacian,sigma = 1.0, k=self.n_component + 1, which='LM')
-        self.output = eigvec.T[self.n_component+1 :: -1] * dig
-        self.output = self.output[1:self.n_component + 1].T
+        self.output = eigvec
+        self.output = self.output.T[1:self.n_component + 1].T
 
         return self
 
@@ -58,8 +58,6 @@ class Laplacian():
 
 
     def fit_transform(self, X):
-
-
         obj = self._fit(X)
         return self.output
 
