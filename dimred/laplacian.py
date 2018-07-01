@@ -25,8 +25,7 @@ class Laplacian():
 
         #
         laplacian, dig = sparse.csgraph.laplacian(self.affinity, normed=True, return_diag=True)
-        laplacian *= -1
-        lambdas, eigvec = eigsh(laplacian,sigma = 1.0, k=self.n_component + 1, which='LM')
+        lambdas, eigvec = eigsh(-laplacian,sigma = 1.0, k=self.n_component + 1, which='LM')
         self.output = eigvec.T[self.n_component+1 :: -1] * dig
         self.output = self.output[1:self.n_component + 1].T
 
