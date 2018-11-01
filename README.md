@@ -1,5 +1,5 @@
-# DimRed
-#### DimRed is a Python module for dimensionality reduction built on top of SciPy and distributed under the 3-Clause BSD license.
+# PyDimRed
+#### PyDimRed is a Python module for dimensionality reduction built on top of SciPy and distributed under the 3-Clause BSD license.
 
 
 
